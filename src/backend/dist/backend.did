@@ -1,0 +1,51 @@
+type Time = int;
+type SearchEntryInternal = 
+ record {
+   coordinates: Coordinate;
+   owner: opt principal;
+   term: text;
+   timestamp: Time;
+   zoomLevel: int;
+ };
+type SearchEntry = 
+ record {
+   coordinates: Coordinate;
+   term: text;
+   timestamp: Time;
+   zoomLevel: int;
+ };
+type FavoritePlace = 
+ record {
+   name: text;
+   owner: opt principal;
+   placeId: text;
+ };
+type Coordinate = 
+ record {
+   latitude: float64;
+   longitude: float64;
+ };
+service : {
+  __favoritePlaces: (ko: opt text, count: opt nat) ->
+   (vec record {
+          text;
+          FavoritePlace;
+        }) query;
+  __searchHistory: (ko: opt text, count: opt nat) ->
+   (vec record {
+          text;
+          SearchEntryInternal;
+        }) query;
+  addFavoritePlace: (placeId: text, name: text) -> ();
+  addSearchTerm: (term: text, lat: float64, long: float64, zoom: int) -> ();
+  clearSearchHistory: () -> ();
+  getFavoritePlaces: () -> (vec record {
+                                  text;
+                                  text;
+                                }) query;
+  getSearchHistory: () -> (vec record {
+                                 text;
+                                 SearchEntry;
+                               }) query;
+  removeFavoritePlace: (placeId: text) -> ();
+}

@@ -1,0 +1,20 @@
+{
+  "overview": "An interactive 3D map application centered on Frankfurt with global search and turn-by-turn route planning (driving, cycling, walking) powered by OpenStreetMap and OpenRouteService.",
+  "features": [
+    "Interactive 3D map with extruded buildings",
+    "Global search for cities and addresses (Nominatim)",
+    "Turn-by-turn route planning for car, bike and on foot",
+    "Route drawing on the map with distance and travel time",
+    "Location markers with smooth camera fly-to",
+    "Saved search history and favorite places"
+  ],
+  "category": "map-app",
+  "tags": [
+    "maps",
+    "3d",
+    "navigation",
+    "routing",
+    "openstreetmap"
+  ],
+  "last_updated": "2026-06-14T00:00:00.000Z"
+}

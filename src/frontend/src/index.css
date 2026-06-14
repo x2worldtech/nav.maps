@@ -1,0 +1,216 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light mode colors using OKLCH */
+    --background: 98% 0.01 240;
+    --foreground: 20% 0.02 240;
+    --card: 100% 0 0;
+    --card-foreground: 20% 0.02 240;
+    --popover: 100% 0 0;
+    --popover-foreground: 20% 0.02 240;
+    --primary: 55% 0.22 260;
+    --primary-foreground: 98% 0.01 260;
+    --secondary: 92% 0.02 240;
+    --secondary-foreground: 20% 0.02 240;
+    --muted: 92% 0.02 240;
+    --muted-foreground: 50% 0.02 240;
+    --accent: 92% 0.02 240;
+    --accent-foreground: 20% 0.02 240;
+    --destructive: 55% 0.22 25;
+    --destructive-foreground: 98% 0.01 25;
+    --border: 85% 0.02 240;
+    --input: 85% 0.02 240;
+    --ring: 55% 0.22 260;
+    --radius: 0.5rem;
+    --success: 60% 0.18 145;
+    --warning: 70% 0.18 60;
+  }
+
+  .dark {
+    /* Dark mode colors using OKLCH */
+    --background: 15% 0.02 240;
+    --foreground: 95% 0.01 240;
+    --card: 18% 0.02 240;
+    --card-foreground: 95% 0.01 240;
+    --popover: 18% 0.02 240;
+    --popover-foreground: 95% 0.01 240;
+    --primary: 65% 0.22 260;
+    --primary-foreground: 15% 0.02 260;
+    --secondary: 25% 0.02 240;
+    --secondary-foreground: 95% 0.01 240;
+    --muted: 25% 0.02 240;
+    --muted-foreground: 60% 0.02 240;
+    --accent: 25% 0.02 240;
+    --accent-foreground: 95% 0.01 240;
+    --destructive: 55% 0.22 25;
+    --destructive-foreground: 98% 0.01 25;
+    --border: 30% 0.02 240;
+    --input: 30% 0.02 240;
+    --ring: 65% 0.22 260;
+    --success: 60% 0.18 145;
+    --warning: 70% 0.18 60;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    /* Prevent double-tap-to-zoom and the 300ms tap delay on touch devices. */
+    touch-action: manipulation;
+    overscroll-behavior: none;
+  }
+}
+
+/* Glassmorphism effect */
+.glass-card {
+  background: color-mix(in oklch, oklch(var(--background)) 80%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Smooth transitions */
+.transition-smooth {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes markerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.scale-in {
+  animation: scaleIn 0.3s ease-out;
+}
+
+.pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: color-mix(in oklch, oklch(var(--muted)) 50%, transparent);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: color-mix(in oklch, oklch(var(--muted-foreground)) 50%, transparent);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(var(--muted-foreground));
+}
+
+/* MapLibre GL overrides */
+.maplibregl-ctrl-group {
+  background: color-mix(in oklch, oklch(var(--background)) 80%, transparent) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid color-mix(in oklch, oklch(var(--border)) 50%, transparent) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 6px -1px color-mix(in oklch, black 10%, transparent), 0 2px
+    4px -2px color-mix(in oklch, black 10%, transparent) !important;
+}
+
+.maplibregl-ctrl-group button {
+  background: transparent !important;
+  border: none !important;
+}
+
+.maplibregl-ctrl-group button:hover {
+  background: color-mix(in oklch, oklch(var(--accent)) 80%, transparent) !important;
+}
+
+.maplibregl-ctrl-group button + button {
+  border-top: 1px solid color-mix(in oklch, oklch(var(--border)) 50%, transparent) !important;
+}
+
+.maplibregl-ctrl-icon {
+  filter: brightness(0) saturate(100%) invert(var(--foreground-brightness, 0));
+}
+
+.dark .maplibregl-ctrl-icon {
+  --foreground-brightness: 1;
+}
+
+/* Arrow marker styles */
+.arrow-marker {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* Touch-friendly utilities */
+@media (hover: none) and (pointer: coarse) {
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Custom marker styles */
+.custom-marker {
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+  transition: transform 0.2s ease-out;
+}
+
+.custom-marker:hover {
+  transform: scale(1.1);
+}
